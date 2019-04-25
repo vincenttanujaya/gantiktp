@@ -34,36 +34,32 @@
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
-      <div id="content">
-
-        <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-          <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
+      <div id="content" style="background-color:#1c4b82">
+        
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#1c4b82;" >
+          <a class="navbar-brand" href="#" style="color:white">Form Pengajuan Pergantian KTP</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
           </button>
-
-          <!-- Topbar Search -->
-
-          <!-- Topbar Navbar -->
-          <ul class="navbar-nav ml-auto">
-
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-
-            <!-- Nav Item - Alerts -->
-
-          </ul>
-
+        
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item active">
+                <a class="nav-link" href="#" style="color:#dd6b4d"><b>Cek Status</b><span class="sr-only">(current)</span></a>
+              </li>
+            </ul>
+            <a href="/login" tabindex="-1" aria-disabled="true" style="color:white"><b>LOGIN</b></a>
+              
+            {{-- <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form> --}}
+          </div>
         </nav>
-        <!-- End of Topbar -->
 
+        <br>
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Form Pengajuan Pergantian KTP</h1>
-          <p class="mb-4">Silahkan isi form dibawah ini sesuai dengan data KTP anda. Pastikan bahwa data yang diisikan benar</p>
 
           <!-- Content Row -->
           <div class="row">
@@ -72,69 +68,63 @@
 
               <!-- Area Chart -->
               <div class="card shadow mb-4">
+                  <div class="card-header text-center" style="background-color:white;color:black">
+                      <b>Masukan Data Diri</b>
+                  </div>
                 <div class="card-body">
-                  <form action="#" id="form" method="post">
+                  <form action="/submitform" id="form" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="row form-group">
-                      <div class="col-3">
-                        <h1 class="h4 mb-2 text-gray-800">Nama</h1>
-                      </div>
                       <div class="col">
-                        <input class="form-control" name="nama" required>
+                        <input class="form-control" name="nama" required placeholder="Masukan Nama">
                       </div>
                     </div>
-                    <hr>
                     <div class="row form-group">
-                      <div class="col-3">
-                        <h1 class="h4 mb-2 text-gray-800">NIK</h1>
-                      </div>
                       <div class="col">
-                        <input class="form-control" name="nik" required>
+                        <input class="form-control" type="number" name="nik" required placeholder="Masukan Nomor Induk Kependudukan" minlength="16" maxlength="16">
                       </div>
                     </div>
-                    <hr>
                     <div class="row form-group">
-                      <div class="col-3">
-                        <h1 class="h4 mb-2 text-gray-800">Alamat</h1>
-                      </div>
                       <div class="col">
-                        <input class="form-control" name="alamat" required>
+                        <input class="form-control" name="alamat" required placeholder="Masukan Alamat">
                       </div>
                     </div>
-                    <hr>
                     <div class="row form-group">
-                      <div class="col-3">
-                        <h1 class="h4 mb-2 text-gray-800">RT/RW</h1>
-                      </div>
                       <div class="col">
-                        <input class="form-control" name="rt" required>
+                        <input type="number" class="form-control" name="rt" required placeholder="RT">
                       </div>
-                      <h1 class="h4 mb-2 text-gray-800">/</h1>
+                      {{-- <h2 class="h3 mb-2 text-gray-800">/</h2> --}}
                       <div class="col">
-                        <input class="form-control" name="rw" required>
+                        <input type="number" class="form-control" name="rw" required placeholder="RW">
                       </div>
                     </div>
-                    <hr>
                     <div class="row form-group">
-                      <div class="col-3">
-                        <h1 class="h4 mb-2 text-gray-800">Kelurahan</h1>
-                      </div>
                       <div class="col">
-                        <input class="form-control" name="kelurahan" required>
+                        <input class="form-control" name="kelurahan" required placeholder="Kelurahan">
                       </div>
                     </div>
-                    <hr>
                     <div class="row form-group">
-                      <div class="col-3">
-                        <h1 class="h4 mb-2 text-gray-800">Alasan Pergantian</h1>
+                        <div class="col">
+                          <small><b>Alasan Pergantian</b></small>
+                          <select class="form-control" name="alasan" onchange="inputFunction(this)">
+                            <option value="rusak" selected>Rusak</option>
+                            <option value="hilang">Hilang</option>
+                          </select>
+                        </div>
                       </div>
+                    <div class="form-group">
+                        <small for="exampleFormControlFile1"><b>Upload Foto KTP jika KTP Rusak, Upload Surat Kehilangan jika Hilang</b></small>
+                        <input type="file" class="form-control-file" id="file" name="file" required>
+                    </div>
+                    {{-- <div class="row form-group">
                       <div class="col">
+                        <small><b>Alasan Pergantian</b></small>
                         <select class="form-control" name="alasan" onchange="inputFunction(this)">
                           <option value="rusak" selected>Rusak</option>
                           <option value="hilang">Hilang</option>
                         </select>
                       </div>
                     </div>
-                    <hr>
                     <div class="row form-group" id="hilang">
                       <div class="col-3">
                         <h1 class="h4 mb-2 text-gray-800">Upload Surat Kehilangan</h1>
@@ -142,15 +132,15 @@
                       <div class="col">
                       </div>
                     </div>
-                    <hr>
                     <div class="row form-group" id="rusak">
                       <div class="col-3">
                         <h1 class="h4 mb-2 text-gray-800">Upload Foto KTP Rusak</h1>
                       </div>
                       <div class="col">
                       </div>
-                    </div>
+                    </div> --}}
                     <hr>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Kirim</button>
                   </form>
                 </div>
               </div>
@@ -162,10 +152,10 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
+      <footer class="sticky-footer" style="background-color:#1c4b82">
+        <div class="container my-auto" >
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span>Copyright &copy; ITS Surabaya</span>
           </div>
         </div>
       </footer>
