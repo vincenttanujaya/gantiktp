@@ -24,21 +24,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $DB = DB::table('Permohonan')->where('Status','DIPROSES')->paginate(10);
+        $DB = DB::table('permohonan')->where('Status','DIPROSES')->paginate(10);
         // dd($DB);
         return view('home',compact(['DB']));
     }
     
     public function riwayat()
     {
-        $DB = DB::table('Permohonan')->where('Status','!=','DIPROSES')->paginate(10);
+        $DB = DB::table('permohonan')->where('Status','!=','DIPROSES')->paginate(10);
         // dd($DB);
         return view('riwayat',compact(['DB']));
     }
 
     public function update(Request $request)
     {
-        DB::table('Permohonan')->where('ID_Permohonan',$request->ID)->update(['Status'=>$request->status]);
+        DB::table('permohonan')->where('ID_Permohonan',$request->ID)->update(['Status'=>$request->status]);
         return redirect('home');
     }
 }
