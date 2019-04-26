@@ -22,5 +22,6 @@ Route::get('/update', 'HomeController@update');
 Route::get('/riwayat', 'HomeController@riwayat');
 Route::get('/status', 'formController@index');
 Route::post('/statusktp', 'formController@status');
+Route::get('/status2', 'formController@status2');
 Route::post('/submitform', 'formController@submit');
 Route::get('/cekdata', 'formController@cekdata');

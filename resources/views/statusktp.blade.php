@@ -20,7 +20,7 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" style="background-color:#1c4b82">
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -48,7 +48,7 @@
                 <a class="nav-link" href="#" style="color:#dd6b4d"><b>Cek Status</b><span class="sr-only">(current)</span></a>
               </li>
             </ul>
-            <a href="/login" tabindex="-1" aria-disabled="true" style="color:white"><b>LOGIN</b></a>
+            <a href="#" tabindex="-1" aria-disabled="true" style="color:white"><b>LOGIN</b></a>
               
             {{-- <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Search">
@@ -69,60 +69,23 @@
               <!-- Area Chart -->
               <div class="card shadow mb-4">
                   <div class="card-header text-center" style="background-color:white;color:black">
-                      <b>Masukan Data Diri</b>
+                      <b>CEK STATUS</b>
                   </div>
                 <div class="card-body">
-                  <form action="/submitform" id="form" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="row form-group">
-                      <div class="col">
-                        <input class="form-control" type="number" name="nik" id="nik" required placeholder="Masukan Nomor Induk Kependudukan" minlength="16" maxlength="16">
-                      </div>
-                    </div>
-                    
-                    <div class="row form-group">
-                      <div class="col">
-                        <input class="form-control" name="nama" id="nama" required placeholder="Masukan Nama">
-                      </div>
-                    </div>
-                    <div class="row form-group">
-                      <div class="col">
-                        <input class="form-control" name="alamat" id="alamat" required placeholder="Masukan Alamat">
-                      </div>
-                    </div>
-                    <div class="row form-group">
-                      <div class="col">
-                        <input type="number" class="form-control" name="rt" id="rt" required placeholder="RT">
-                      </div>
-                      {{-- <h2 class="h3 mb-2 text-gray-800">/</h2> --}}
-                      <div class="col">
-                        <input type="number" class="form-control" name="rw" id="rw" required placeholder="RW">
-                      </div>
-                    </div>
-                    <div class="row form-group">
-                      <div class="col">
-                        <input class="form-control" name="kelurahan" id="kelurahan" required placeholder="Kelurahan">
-                      </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col">
-                          <small><b>Alasan Pergantian</b></small>
-                          <select class="form-control" name="alasan" id="alasan" onchange="inputFunction(this)">
-                            <option value="rusak" selected>Rusak</option>
-                            <option value="hilang">Hilang</option>
-                          </select>
-                        </div>
-                      </div>
-                    <div class="form-group">
-                        <small for="exampleFormControlFile1"><b>Upload Foto KTP jika KTP Rusak, Upload Surat Kehilangan jika Hilang</b></small>
-                        <input type="file" class="form-control-file" id="file" name="file" required>
-                    </div>
-                    <div class="form-group">
-                        Baca panduan terkait pergantian KTP <a href="{{ url('/panduan')}}">di sini</a>.
-                    </div>
+                <form action="/statusktp" id="form" method="post">
+                  @csrf
+                    <input class="form-control" name="nik" required placeholder="Masukan NIK">
+                  <hr>
+                  <button type="submit" class="btn btn-primary btn-lg btn-block">Kirim</button>
+                </form>
+                @if ($status===3)
                     <hr>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Kirim</button>
-                  </form>
+                    <b>DATA TIDAK DITEMUKAN</b>
+                @elseif ($status == 1)
+                @else
+                    <hr>
+                    <b>Status : {{$status}}</b>
+                @endif
                 </div>
               </div>
             </div>
@@ -160,28 +123,6 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <script>
-  $(document).ready(function(){
-        $('#nik').change(function(){
-            var id=$(this).val();
-            $.ajax({
-                url : "/cekdata",
-                method : "GET",
-                data : {nik: id},
-                async : false,
-                dataType : 'json',
-                success: function(data){
-                    $('#nama').val(data[0].Nama);
-                    $('#alamat').val(data[0].Alamat);
-                    $('#rt').val(data[0].RT);
-                    $('#rw').val(data[0].RW);
-                    $('#kelurahan').val(data[0].Kelurahan);          
-                }
-            });
-        });
-    });
-  </script>
-  
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -195,9 +136,6 @@
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
   <script src="js/demo/chart-bar-demo.js"></script>
-
-  
-  
 </body>
 
 </html>

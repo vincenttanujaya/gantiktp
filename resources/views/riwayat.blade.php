@@ -5,7 +5,20 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header"><b>Daftar Riwayat</b></div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col">
+                            <h5><b>Daftar Riwayat</b></h5>
+                        </div>
+                        <div class="col-6">
+                        </div>
+                        <div class="col">
+                            <a href="{{ url('/home') }}">
+                                <button class="btn btn-warning float-right"><i class="fa fa-arrow-left"></i>  Kembali</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                     <table class="table table-bordered">

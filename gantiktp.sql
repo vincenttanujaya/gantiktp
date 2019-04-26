@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Apr 2019 pada 13.31
+-- Waktu pembuatan: 26 Apr 2019 pada 08.36
 -- Versi server: 10.1.31-MariaDB
 -- Versi PHP: 7.2.4
 
@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `gantiktp`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kependudukan`
+--
+
+CREATE TABLE `kependudukan` (
+  `NIK` int(11) NOT NULL,
+  `Nama` varchar(100) NOT NULL,
+  `Alamat` varchar(200) NOT NULL,
+  `RT` int(11) NOT NULL,
+  `RW` int(11) NOT NULL,
+  `Kelurahan` varchar(100) NOT NULL,
+  `Kecamatan` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `kependudukan`
+--
+
+INSERT INTO `kependudukan` (`NIK`, `Nama`, `Alamat`, `RT`, `RW`, `Kelurahan`, `Kecamatan`) VALUES
+(12345678, 'Deni Dono', 'Jl. Rumah Deni', 2, 3, 'Putat Jaya', 'Sawahan');
 
 -- --------------------------------------------------------
 
@@ -49,8 +72,30 @@ CREATE TABLE `permohonan` (
   `Kelurahan` varchar(30) NOT NULL,
   `urlFoto` varchar(100) NOT NULL,
   `Alasan` varchar(200) NOT NULL,
-  `NIK` varchar(100) NOT NULL
+  `NIK` varchar(100) NOT NULL,
+  `Status` varchar(100) NOT NULL DEFAULT 'DIPROSES'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `permohonan`
+--
+
+INSERT INTO `permohonan` (`ID_Permohonan`, `Nama`, `Alamat`, `RT`, `RW`, `Kelurahan`, `urlFoto`, `Alasan`, `NIK`, `Status`) VALUES
+(1, 'Vincent Tanujaya', 'Jl. Keputih Perintis 1 no 25, Surabaya', 1, 1, 'Keputih', 'TEST', 'rusak', '3323131', 'SELESAI'),
+(2, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', 'public/img/fileupload/kHJHCL9YVhmiHR46VgChw6k7tNP3xu2wEM0UULpr.jpeg', 'hilang', '3323131', 'DITOLAK, Data KTP/Surat Tidak Sesuai'),
+(3, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', 'img/fileupload/SGwf7VbHuNbF6GBg6tyYCyg5SX8UeP2tBcsMBDH4.jpeg', 'hilang', '3323131', 'DIPROSES'),
+(4, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', 'public/zFUy60LP2c55tHNmQdIvqmaImvhnIbDXV0vShPNQ.jpeg', 'hilang', '3323131', 'DIPROSES'),
+(5, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', 'public/ZsvGOz5lGiVSJYNtdVERn3PcYqNJRp3atmK9Mm0x.jpeg', 'hilang', '3323131', 'DIPROSES'),
+(6, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', 'WIN_20180316_17_13_38_Pro.jpg', 'hilang', '3323131', 'DIPROSES'),
+(7, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', 'WIN_20180316_17_13_38_Pro.jpg', 'hilang', '3323131', 'DIPROSES'),
+(8, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', 'WIN_20180316_17_13_38_Pro.jpg', 'hilang', '3323131', 'DIPROSES'),
+(9, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', '3323131_WIN_20180316_17_13_38_Pro.jpg', 'hilang', '3323131', 'DIPROSES'),
+(10, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', '3323131_ivan fadhila.jpg', 'hilang', '3323131', 'DIPROSES'),
+(11, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', '1_ivan fadhila.jpg', 'rusak', '1', 'DIPROSES'),
+(12, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', '1_ivan fadhila.jpg', 'rusak', '1', 'DIPROSES'),
+(13, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', '1_ivan fadhila.jpg', 'rusak', '1', 'DIPROSES'),
+(14, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', '1_ivan fadhila.jpg', 'rusak', '1', 'DIPROSES'),
+(15, 'Vincent Tanujaya', 'dsfsdfsd', 1, 1, 'Keputih', '1_ivan fadhila.jpg', 'rusak', '1', 'DIPROSES');
 
 -- --------------------------------------------------------
 
@@ -79,6 +124,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indeks untuk tabel `kependudukan`
+--
+ALTER TABLE `kependudukan`
+  ADD PRIMARY KEY (`NIK`);
 
 --
 -- Indeks untuk tabel `migrations`
@@ -112,7 +163,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `permohonan`
 --
 ALTER TABLE `permohonan`
-  MODIFY `ID_Permohonan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Permohonan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`

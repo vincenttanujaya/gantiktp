@@ -32,6 +32,12 @@ class formController extends Controller
         $status = 1;
         return view('status',compact(['status']));
     }
+
+    public function status2(){
+        $status = 1;
+        return view('statusktp',compact(['status']));
+    }
+
     public function status(Request $request){
         $DB=DB::table('permohonan')->where('NIK', $request->nik)->orderBy('ID_Permohonan', 'desc')->first();
         if ($DB) {
