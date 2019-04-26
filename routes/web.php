@@ -23,3 +23,4 @@ Route::get('/riwayat', 'HomeController@riwayat');
 Route::get('/status', 'formController@index');
 Route::post('/statusktp', 'formController@status');
 Route::post('/submitform', 'formController@submit');
+Route::get('/cekdata', 'formController@cekdata');

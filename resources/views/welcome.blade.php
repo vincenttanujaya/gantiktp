@@ -76,37 +76,38 @@
                     @csrf
                     <div class="row form-group">
                       <div class="col">
-                        <input class="form-control" name="nama" required placeholder="Masukan Nama">
+                        <input class="form-control" type="number" name="nik" id="nik" required placeholder="Masukan Nomor Induk Kependudukan" minlength="16" maxlength="16">
+                      </div>
+                    </div>
+                    
+                    <div class="row form-group">
+                      <div class="col">
+                        <input class="form-control" name="nama" id="nama" required placeholder="Masukan Nama">
                       </div>
                     </div>
                     <div class="row form-group">
                       <div class="col">
-                        <input class="form-control" type="number" name="nik" required placeholder="Masukan Nomor Induk Kependudukan" minlength="16" maxlength="16">
+                        <input class="form-control" name="alamat" id="alamat" required placeholder="Masukan Alamat">
                       </div>
                     </div>
                     <div class="row form-group">
                       <div class="col">
-                        <input class="form-control" name="alamat" required placeholder="Masukan Alamat">
-                      </div>
-                    </div>
-                    <div class="row form-group">
-                      <div class="col">
-                        <input type="number" class="form-control" name="rt" required placeholder="RT">
+                        <input type="number" class="form-control" name="rt" id="rt" required placeholder="RT">
                       </div>
                       {{-- <h2 class="h3 mb-2 text-gray-800">/</h2> --}}
                       <div class="col">
-                        <input type="number" class="form-control" name="rw" required placeholder="RW">
+                        <input type="number" class="form-control" name="rw" id="rw" required placeholder="RW">
                       </div>
                     </div>
                     <div class="row form-group">
                       <div class="col">
-                        <input class="form-control" name="kelurahan" required placeholder="Kelurahan">
+                        <input class="form-control" name="kelurahan" id="kelurahan" required placeholder="Kelurahan">
                       </div>
                     </div>
                     <div class="row form-group">
                         <div class="col">
                           <small><b>Alasan Pergantian</b></small>
-                          <select class="form-control" name="alasan" onchange="inputFunction(this)">
+                          <select class="form-control" name="alasan" id="alasan" onchange="inputFunction(this)">
                             <option value="rusak" selected>Rusak</option>
                             <option value="hilang">Hilang</option>
                           </select>
@@ -179,6 +180,28 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+  <script>
+  $(document).ready(function(){
+        $('#nik').change(function(){
+            var id=$(this).val();
+            $.ajax({
+                url : "/cekdata",
+                method : "GET",
+                data : {nik: id},
+                async : false,
+                dataType : 'json',
+                success: function(data){
+                    $('#nama').val(data[0].Nama);
+                    $('#alamat').val(data[0].Alamat);
+                    $('#rt').val(data[0].RT);
+                    $('#rw').val(data[0].RW);
+                    $('#kelurahan').val(data[0].Kelurahan);          
+                }
+            });
+        });
+    });
+  </script>
+  
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -193,23 +216,8 @@
   <script src="js/demo/chart-pie-demo.js"></script>
   <script src="js/demo/chart-bar-demo.js"></script>
 
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('#rusak').show();
-      $('#hilang').hide();
-    });
-    function inputFunction(element) {
-      if (element.value == 'rusak') {
-        $('#rusak').show();
-        $('#hilang').hide();
-      }
-      else {
-        $('#rusak').hide();
-        $('#hilang').show();
-      }
-    }
-  </script>
-
+  
+  
 </body>
 
 </html>

@@ -42,4 +42,13 @@ class formController extends Controller
         }
         return view('status',compact(['status']));
     }
+    
+    public function cekdata(Request $request){
+        if($request->has('nik')){
+            $cari=$request->nik;
+            $data = DB::table('kependudukan')->where('NIK',$cari)->get();
+            return response()->json($data);
+        }
+        return "false";
+    }
 }
