@@ -31,7 +31,7 @@
                                     <th scope="col">Alasan</th>
                                     <th scope="col">Foto</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Aksi</th>
+                                    {{-- <th scope="col">Aksi</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,7 +44,7 @@
                                     <td class="align-middle">{{$item->Alasan}}</td>
                                     <td class="align-middle"><a href="/img/fileupload/{{$item->urlFoto}}" target="_blank"><img src="/img/fileupload/{{$item->urlFoto}}" width="100px" alt=""></a></td>
                                     <td class="align-middle">{{$item->Status}}</td>
-                                    <td class="align-middle">
+                                    {{-- <td class="align-middle">
                                         <form action="/update" action="POST">
                                             @csrf
                                             <input type="hidden" value="{{$item->ID_Permohonan}}" name="ID">
@@ -63,7 +63,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>

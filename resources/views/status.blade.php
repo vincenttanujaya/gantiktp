@@ -48,7 +48,7 @@
                 <a class="nav-link" href="#" style="color:#dd6b4d"><b>Cek Status</b><span class="sr-only">(current)</span></a>
               </li>
             </ul>
-            <a href="#" tabindex="-1" aria-disabled="true" style="color:white"><b>LOGIN</b></a>
+            <a href="/login" tabindex="-1" aria-disabled="true" style="color:white"><b>LOGIN</b></a>
               
             {{-- <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Search">

@@ -36,7 +36,7 @@
                                                 @csrf
                                                 <input type="hidden" value="{{$item->ID_Permohonan}}" name="ID">
                                                 <div class="row">
-                                                <div class="col-8">
+                                                {{-- <div class="col-8">
                                                     <select class="form-control" id="exampleFormControlSelect1" name="status">
                                                         <option value="DIPROSES">DIPROSES</option>
                                                         <option value="SELESAI">SELESAI</option>
@@ -44,9 +44,12 @@
                                                         <option value="DITOLAK, Harap Datang Langsung ke Kecamatan">DITOLAK, Harap Datang Langsung ke Kecamatan</option>
                                                         <option value="BLANKO HABIS, Harap datang langsung ke Dukcapil">BLANKO HABIS, Harap datang langsung ke Dukcapil</option>
                                                     </select>
+                                                </div> --}}
+                                                <div class="col">
+                                                <button type="submit" class="btn btn-sm btn-success" value="SELESAI" name="status">Selesai</button>
                                                 </div>
                                                 <div class="col">
-                                                <button type="submit" class="btn btn-sm btn-primary">Ubah</button>
+                                                <button type="submit" class="btn btn-sm btn-danger" value="DITOLAK" name="status">Tolak</button>
                                                 </div>
                                                 </div>
                                             </form>
