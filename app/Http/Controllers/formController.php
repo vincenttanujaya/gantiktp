@@ -57,4 +57,18 @@ class formController extends Controller
         }
         return "false";
     }
+
+    public function cekNik(Request $request){
+        if($request->has('nik')){
+            $result = 'trash';
+            $cari=$request->nik;
+            $data = DB::table('kependudukan')->where('NIK',$cari)->count();
+            if ($data) {
+                $result = 'found';
+            }
+            else $result = 'not_found';
+            return response()->json($result);
+        }
+        return "false";
+    }
 }

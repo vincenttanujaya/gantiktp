@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome2');
 });
 
 Auth::routes();
@@ -25,3 +25,4 @@ Route::post('/statusktp', 'formController@status');
 Route::get('/status2', 'formController@status2');
 Route::post('/submitform', 'formController@submit');
 Route::get('/cekdata', 'formController@cekdata');
+Route::get('/cekNik', 'formController@cekNik');
