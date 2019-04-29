@@ -28,6 +28,23 @@ class formController extends Controller
         ]);
         return redirect('status');
     }
+
+    public function viewForm($nik)
+    {
+        $data = DB::table('kependudukan')->where('NIK',$nik)->get();
+
+        return view('form', $data);
+    }
+
+    public function form(Request $request)
+    {
+        $nik = $request->nik;
+        $data['kependudukan'] = DB::table('kependudukan')->where('NIK',$nik)->get();
+
+        // dd($data);
+        return view('form', $data);
+    }
+
     public function index(){
         $status = 1;
         return view('status',compact(['status']));

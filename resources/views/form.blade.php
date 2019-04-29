@@ -20,7 +20,7 @@
 
 </head>
 
-<body id="page-top" style="background-color:#1c4b82">
+<body id="page-top">
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -66,48 +66,72 @@
 
             <div class="col-xl-6 col-lg-7" style="width:800px; margin:0 auto;">
 
-              <div class="alert alert-danger alert-dismissible fade show" style="display:none;" role="alert" id="fail">
-                <strong>Data anda tidak ditemukan!</strong> NIK anda salah atau tidak terdaftar di kecamatan ini. Silahkan hubungi Dukcapil terdekat.
-              </div>
-
-              <div class="alert alert-success alert-dismissible fade show" style="display:none;" role="alert" id="success">
-                <strong>Data anda ditemukan!</strong> 
-              </div>
-
               <!-- Area Chart -->
               <div class="card shadow mb-4">
                   <div class="card-header text-center" style="background-color:white;color:black">
-                      <b>Masukan NIK</b>
+                      <b>Masukan Data Diri</b>
                   </div>
                 <div class="card-body">
-                  <form action="/form" id="form" method="post" enctype="multipart/form-data">
+                  <form action="/submitform" id="form" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row form-group">
                       <div class="col">
-                        <input class="form-control" type="number" name="nik" id="nik" required placeholder="Masukan Nomor Induk Kependudukan" minlength="16" maxlength="16">
+                        <small><b>NIK</b></small>
+                        <input class="form-control" type="number" name="nik" id="nik" readonly value="{{ $kependudukan[0]->NIK }}">
                       </div>
+                    </div>
+                    
+                    <div class="row form-group">
+                      <div class="col">
+                        <small><b>Nama Lengkap</b></small>
+                        <input class="form-control" name="nama" id="nama" readonly value="{{ $kependudukan[0]->Nama }}">
+                      </div>
+                    </div>
+                    <div class="row form-group">
+                      <div class="col">
+                        <small><b>Alamat</b></small>
+                        <input class="form-control" name="alamat" id="alamat" readonly value="{{ $kependudukan[0]->Alamat }}">
+                      </div>
+                    </div>
+                    <div class="row form-group">
+                      <div class="col">
+                        <small><b>RT</b></small>
+                        <input type="number" class="form-control" name="rt" id="rt" readonly value="{{ $kependudukan[0]->RT }}">
+                      </div>
+                      {{-- <h2 class="h3 mb-2 text-gray-800">/</h2> --}}
+                      <div class="col">
+                        <small><b>RW</b></small>
+                        <input type="number" class="form-control" name="rw" id="rw" readonly value="{{ $kependudukan[0]->RW }}">
+                      </div>
+                    </div>
+                    <div class="row form-group">
+                      <div class="col">
+                        <small><b>Kelurahan</b></small>
+                        <input class="form-control" name="kelurahan" id="kelurahan" readonly value="{{ $kependudukan[0]->Kelurahan }}">
+                      </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col">
+                          <small><b>Alasan Pergantian</b></small>
+                          <select class="form-control" name="alasan" id="alasan" onchange="inputFunction(this)">
+                            <option value="rusak" selected>Rusak</option>
+                            <option value="hilang">Hilang</option>
+                          </select>
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <small for="exampleFormControlFile1"><b>Upload Foto KTP jika KTP Rusak, Upload Surat Kehilangan jika Hilang</b></small>
+                        <input type="file" class="form-control-file" id="file" name="file" required>
                     </div>
                     <div class="form-group">
                         Baca panduan terkait pergantian KTP <a href="{{ url('/panduan')}}">di sini</a>.
                     </div>
                     <hr>
-                    <div class="row form-group">
-                      <div class="col">
-                        <input class="form-control" style="display:none;" name="result" id="result">
-                      </div>
-                    </div>
-                    <div class="row form-group">
-                      <div class="col">
-                        <button type="submit" id="submit" class="btn btn-primary btn-lg btn-block" style="display:none;">Ajukan Pergantian KTP</button>
-                      </div>
-                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Kirim</button>
                   </form>
                 </div>
               </div>
             </div>
-
-          </div>
-
         </div>
         <!-- /.container-fluid -->
 
@@ -115,7 +139,7 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer class="sticky-footer" style="background-color:#1c4b82; bottom: 0; left: 0; position: fixed; width: 100%;">
+      <footer class="sticky-footer" style="background-color:#1c4b82">
         <div class="container my-auto" >
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; ITS Surabaya</span>
@@ -142,35 +166,22 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <script type="text/javascript">
-  function changeFunction($data)
-    {
-      if($data == 'found')
-      {
-        $('#fail').hide();
-        $('#success').show();
-        $('#submit').show();
-      }
-      else
-      {
-        $('#fail').show();
-        $('#success').hide();
-        $('#submit').hide();
-      }
-    }
-
+  <script>
   $(document).ready(function(){
         $('#nik').change(function(){
             var id=$(this).val();
             $.ajax({
-                url : "/cekNik",
+                url : "/cekdata",
                 method : "GET",
                 data : {nik: id},
                 async : false,
                 dataType : 'json',
                 success: function(data){
-                    $('#result').val(data);
-                    changeFunction(data);
+                    $('#nama').val(data[0].Nama);
+                    $('#alamat').val(data[0].Alamat);
+                    $('#rt').val(data[0].RT);
+                    $('#rw').val(data[0].RW);
+                    $('#kelurahan').val(data[0].Kelurahan);          
                 }
             });
         });
@@ -179,7 +190,6 @@
   
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="vendor/jquery/jquery.min.js"></script>
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
