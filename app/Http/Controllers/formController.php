@@ -24,7 +24,9 @@ class formController extends Controller
             'Kelurahan' => $request->kelurahan,
             'urlFoto' => $namafile,
             'Alasan' => $request->alasan,
-            'NIK' => $request->nik
+            'NIK' => $request->nik,
+            'HP' => $request->hp,
+            'WA' => $request->wa
         ]);
         return redirect('status');
     }

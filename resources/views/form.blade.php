@@ -111,6 +111,18 @@
                       </div>
                     </div>
                     <div class="row form-group">
+                      <div class="col">
+                        <small><b>No HP</b></small>
+                        <input class="form-control" name="hp" id="hp" required>
+                      </div>
+                    </div>
+                    <div class="row form-group">
+                      <div class="col">
+                        <small><b>No WA</b></small>
+                        <input class="form-control" name="wa" id="wa" required>
+                      </div>
+                    </div>
+                    <div class="row form-group">
                         <div class="col">
                           <small><b>Alasan Pergantian</b></small>
                           <select class="form-control" name="alasan" id="alasan" onchange="inputFunction(this)">
