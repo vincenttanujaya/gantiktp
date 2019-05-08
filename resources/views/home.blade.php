@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+<script src="{{ asset('js/sweetalert.min.js') }}" defer></script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -24,15 +27,15 @@
                                 <tbody>
                                     @foreach ($DB as $item)  
                                       <tr>
-                                      <th scope="row">{{$item->ID_Permohonan}}</th>
+                                        <td class="align-middle">{{$item->ID_Permohonan}}</td>
                                         <td class="align-middle">{{$item->Nama}}</td>
                                         <td class="align-middle">{{$item->NIK}}</td>
                                         <td class="align-middle">{{$item->Alamat}} RT.{{$item->RT}} RW.{{$item->RW}} Kelurahan {{$item->Kelurahan}}</td>
                                         <td class="align-middle">{{$item->Alasan}}</td>
-                                      <td class="align-middle"><a href="/img/fileupload/{{$item->urlFoto}}" target="_blank"><img src="/img/fileupload/{{$item->urlFoto}}" width="100px" alt=""></a></td>
+                                        <td class="align-middle"><a href="/img/fileupload/{{$item->urlFoto}}" target="_blank"><img src="/img/fileupload/{{$item->urlFoto}}" width="100px" alt=""></a></td>
                                         <td class="align-middle">{{$item->Status}}</td>
                                         <td class="align-middle">
-                                            <form action="/update" action="POST">
+                                            <form id="actionForm" action="/update" action="POST">
                                                 @csrf
                                                 <input type="hidden" value="{{$item->ID_Permohonan}}" name="ID">
                                                 <div class="row">
@@ -45,11 +48,12 @@
                                                         <option value="BLANKO HABIS, Harap datang langsung ke Dukcapil">BLANKO HABIS, Harap datang langsung ke Dukcapil</option>
                                                     </select>
                                                 </div> --}}
+                                                    <input type="hidden" value="" name="status">
                                                 <div class="col">
-                                                <button type="submit" class="btn btn-sm btn-success" value="SELESAI" name="status">Selesai</button>
+                                                    <button type="submit" class="btn btn-sm btn-success" onclick=successClick()>Selesai</button>
                                                 </div>
                                                 <div class="col">
-                                                <button type="submit" class="btn btn-sm btn-danger" value="DITOLAK" name="status">Tolak</button>
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick=failClick()>Tolak</button>
                                                 </div>
                                                 </div>
                                             </form>
@@ -66,4 +70,37 @@
         </div>
     </div>
 </div>
+<script>
+    function successClick(){
+        event.preventDefault();
+        swal({
+            title: "Apakah Anda Yakin ?",
+            text: "Apakah anda yakin mengonfirmasi permohonan ini ?",
+            icon: "warning",
+            showCancelButton: true,
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: "Ya",
+            cancelButtonText: "Batal",
+        })
+            .then(function () {
+                document.getElementsByName("status")[0].value = "SELESAI";
+                $('#actionForm').submit();
+            })}
+    function failClick(){
+        event.preventDefault();
+        swal({
+            title: "Apakah Anda Yakin ?",
+            text: "Apakah anda yakin menolak permohonan ini ?",
+            icon: "warning",
+            showCancelButton: true,
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: "Ya",
+            cancelButtonText: "Batal",
+        })
+            .then(function () {
+                document.getElementsByName("status")[0].value = "DITOLAK";
+                $('#actionForm').submit();
+            })}
+</script>
+
 @endsection

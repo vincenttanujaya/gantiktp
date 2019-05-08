@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Charts</title>
+  <title>Cek Status Pengajuan Penggantian e-KTP</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -45,7 +45,7 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item active">
-                <a class="nav-link" href="/status" style="color:#dd6b4d"><b>Cek Status</b><span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/" style="color:#dd6b4d"><b>Form Pengajuan</b><span class="sr-only">(current)</span></a>
               </li>
             </ul>
             <a href="/login" tabindex="-1" aria-disabled="true" style="color:white"><b>LOGIN</b></a>

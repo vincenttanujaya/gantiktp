@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Charts</title>
+  <title>Formulir Pengajuan Penggantian e-KTP Sawahan</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -45,7 +45,7 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item active">
-                <a class="nav-link" href="#" style="color:#dd6b4d"><b>Cek Status</b><span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/status" style="color:#dd6b4d"><b>Cek Status</b><span class="sr-only">(current)</span></a>
               </li>
             </ul>
             <a href="/login" tabindex="-1" aria-disabled="true" style="color:white"><b>LOGIN</b></a>
@@ -119,15 +119,16 @@
                     <div class="row form-group">
                       <div class="col">
                         <small><b>No WA</b></small>
-                        <input class="form-control" name="wa" id="wa" required>
+                        <input class="form-control" name="wa" id="wa">
                       </div>
                     </div>
                     <div class="row form-group">
                         <div class="col">
                           <small><b>Alasan Pergantian</b></small>
                           <select class="form-control" name="alasan" id="alasan" onchange="inputFunction(this)">
-                            <option value="rusak" selected>Rusak</option>
-                            <option value="hilang">Hilang</option>
+                            <option value="Rusak" selected>Rusak</option>
+                            <option value="Hilang">Hilang</option>
+                            <option value="Pindah">Pindah</option>
                           </select>
                         </div>
                       </div>
