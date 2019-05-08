@@ -53,7 +53,11 @@
                         @else
                             
                             <li class="nav-item">
-                                <a class="nav-link" href="/riwayat" style="color:white">Riwayat Permohonan</a>
+                                @if(Request::path() === 'home')
+                                    <a class="nav-link" href="/riwayat" style="color:white">Riwayat Permohonan</a>
+                                @elseif(Request::path() === 'riwayat')
+                                    <a class="nav-link" href="/home" style="color:white">Daftar Permohonan</a>
+                                @endif
                             </li>
                             <li class="nav-item dropdown">
                                 

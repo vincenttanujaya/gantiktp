@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Charts</title>
+  <title>Cek Status Pengajuan Penggantian e-KTP</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
