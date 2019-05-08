@@ -46,10 +46,10 @@
                                                     </select>
                                                 </div> --}}
                                                 <div class="col">
-                                                <button type="submit" class="btn btn-sm btn-success" value="SELESAI" name="status">Selesai</button>
+                                                <button type="button" id="selesai" class="btn btn-sm btn-success" value="SELESAI" name="status" data-toggle="modal" data-target="#selesaimodal">Selesai</button>
                                                 </div>
                                                 <div class="col">
-                                                <button type="submit" class="btn btn-sm btn-danger" value="DITOLAK" name="status">Tolak</button>
+                                                <button type="button" id="tolak" class="btn btn-sm btn-danger" value="DITOLAK" name="status" data-toggle="modal" data-target="#tolakmodal">Tolak</button>
                                                 </div>
                                                 </div>
                                             </form>
@@ -59,11 +59,59 @@
                                 </tbody>
                               </table>
                             </div>
-
                     {{$DB->links()}}
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="selesaimodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+
+@section('js')
+<script type="text/javascript">
+    $(document).ready(function(){
+          $('#nik').keyup(function(){
+            var maxLength = $(this).attr("maxlength");
+            if(maxLength == $(this).val().length)
+            {
+              var id=$(this).val();
+              $.ajax({
+                  url : "/cekNik",
+                  method : "GET",
+                  data : {nik: id},
+                  async : false,
+                  dataType : 'json',
+                  success: function(data){
+                      $('#result').val(data);
+                      changeFunction(data);
+                  }
+              });
+            }
+            else
+            {
+              changeFunction('hideall');
+            }
+          });
+      });
+</script>
 @endsection

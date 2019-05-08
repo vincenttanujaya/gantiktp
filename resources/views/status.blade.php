@@ -69,22 +69,26 @@
               <!-- Area Chart -->
               <div class="card shadow mb-4">
                   <div class="card-header text-center" style="background-color:white;color:black">
-                      <b>CEK STATUS</b>
+                      <b>Cek Status Pengajuan Pergantian KTP</b>
                   </div>
                 <div class="card-body">
                 <form action="/statusktp" id="form" method="post">
                   @csrf
                     <input class="form-control" name="nik" required placeholder="Masukan NIK">
+                    <small>Masukan NIK sesuai dengan KTP yang diajukan untuk diganti.</small>
                   <hr>
                   <button type="submit" class="btn btn-primary btn-lg btn-block">Kirim</button>
                 </form>
+                <br>
                 @if ($status===3)
-                    <hr>
-                    <b>DATA TIDAK DITEMUKAN</b>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="fail">
+                      <strong>Data pengajuan tidak ditemukan.</strong> Periksa kembali NIK anda.
+                    </div>
                 @elseif ($status == 1)
                 @else
-                    <hr>
-                    <b>Status : {{$status}}</b>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" id="success">
+                      <strong>Data anda ditemukan! Status pengajuan pergantian KTP anda : {{$status}}</strong> 
+                    </div>
                 @endif
                 </div>
               </div>

@@ -45,7 +45,7 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item active">
-                <a class="nav-link" href="#" style="color:#dd6b4d"><b>Cek Status</b><span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/status" style="color:#dd6b4d"><b>Cek Status</b><span class="sr-only">(current)</span></a>
               </li>
             </ul>
             <a href="/login" tabindex="-1" aria-disabled="true" style="color:white"><b>LOGIN</b></a>
@@ -77,7 +77,7 @@
               <!-- Area Chart -->
               <div class="card shadow mb-4">
                   <div class="card-header text-center" style="background-color:white;color:black">
-                      <b>Masukan NIK</b>
+                      <b>Masukan 16-digit NIK</b>
                   </div>
                 <div class="card-body">
                   <form action="/form" id="form" method="post" enctype="multipart/form-data">
@@ -85,20 +85,21 @@
                     <div class="row form-group">
                       <div class="col">
                         <input class="form-control" type="number" name="nik" id="nik" required placeholder="Masukan Nomor Induk Kependudukan" minlength="16" maxlength="16">
+                        <small>Pastikan NIK anda terdiri dari 16 digit dan sesuai dengan KTP/KK anda.</small>
                       </div>
                     </div>
                     <div class="form-group">
                         Baca panduan terkait pergantian KTP <a href="{{ url('/panduan')}}">di sini</a>.
                     </div>
                     <hr>
-                    <div class="row form-group">
+                    <div class="row form-group" style="display:none;">
                       <div class="col">
-                        <input class="form-control" style="display:none;" name="result" id="result">
+                        <input class="form-control" name="result" id="result">
                       </div>
                     </div>
-                    <div class="row form-group">
+                    <div class="row form-group" id="submit" style="display:none;">
                       <div class="col">
-                        <button type="submit" id="submit" class="btn btn-primary btn-lg btn-block" style="display:none;">Ajukan Pergantian KTP</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Ajukan Pergantian KTP</button>
                       </div>
                     </div>
                   </form>
@@ -151,6 +152,12 @@
         $('#success').show();
         $('#submit').show();
       }
+      else if($data == 'hideall')
+      {
+        $('#fail').hide();
+        $('#success').hide();
+        $('#submit').hide();
+      }
       else
       {
         $('#fail').show();
@@ -160,7 +167,10 @@
     }
 
   $(document).ready(function(){
-        $('#nik').change(function(){
+        $('#nik').keyup(function(){
+          var maxLength = $(this).attr("maxlength");
+          if(maxLength == $(this).val().length)
+          {
             var id=$(this).val();
             $.ajax({
                 url : "/cekNik",
@@ -173,6 +183,11 @@
                     changeFunction(data);
                 }
             });
+          }
+          else
+          {
+            changeFunction('hideall');
+          }
         });
     });
   </script>
