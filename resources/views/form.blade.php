@@ -119,15 +119,16 @@
                     <div class="row form-group">
                       <div class="col">
                         <small><b>No WA</b></small>
-                        <input class="form-control" name="wa" id="wa" required>
+                        <input class="form-control" name="wa" id="wa">
                       </div>
                     </div>
                     <div class="row form-group">
                         <div class="col">
                           <small><b>Alasan Pergantian</b></small>
                           <select class="form-control" name="alasan" id="alasan" onchange="inputFunction(this)">
-                            <option value="rusak" selected>Rusak</option>
-                            <option value="hilang">Hilang</option>
+                            <option value="Rusak" selected>Rusak</option>
+                            <option value="Hilang">Hilang</option>
+                            <option value="Pindah">Pindah</option>
                           </select>
                         </div>
                       </div>
