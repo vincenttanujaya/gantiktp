@@ -46,10 +46,14 @@
                                                     </select>
                                                 </div> --}}
                                                 <div class="col">
-                                                <button type="button" id="selesai" class="btn btn-sm btn-success" value="SELESAI" name="status" data-toggle="modal" data-target="#selesaimodal">Selesai</button>
+                                                @if($item->WA == null)
+                                                <button type="button" id="selesai" class="btn btn-sm btn-success" value="SELESAI" data-id="{{$item->ID_Permohonan}}" data-hp="{{$item->HP}}" data-toggle="modal" data-target="#selesaihpmodal">Selesai</button>
+                                                @else
+                                                <button type="button" id="selesai" class="btn btn-sm btn-success" value="SELESAI" data-id="{{$item->ID_Permohonan}}" data-wa="https://api.whatsapp.com/send?phone=62{{$item->WA}}" data-toggle="modal" data-target="#selesaiwamodal">Selesai</button>
+                                                @endif
                                                 </div>
                                                 <div class="col">
-                                                <button type="button" id="tolak" class="btn btn-sm btn-danger" value="DITOLAK" name="status" data-toggle="modal" data-target="#tolakmodal">Tolak</button>
+                                                <button type="button" id="tolak" class="btn btn-sm btn-danger" value="DITOLAK" data-toggle="modal" data-target="#tolakmodal">Tolak</button>
                                                 </div>
                                                 </div>
                                             </form>
@@ -66,52 +70,53 @@
     </div>
 </div>
 
-<div class="modal fade" id="selesaimodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="selesaihpmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi pengiriman notifikasi</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" name="content">
+        
+      </div>
+      <form action="/update" method="post" id="formhp">
+        {{ csrf_field() }}
+        <input type="hidden" name="idpermohonan" value="">
+        <input type="hidden" name="status" value="DITOLAK">
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+        <button onclick="document.getElementById('formhp').submit();" class="btn btn-primary">Lanjutkan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="selesaiwamodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi pengiriman notifikasi</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+        Pemohon memiliki Whatsapp. Kirim notifikasi ke nomor Whatsapp pemohon dan terima permohonan?
       </div>
+      <form action="/update" method="post" id="formwa">
+        {{ csrf_field() }}
+        <input type="hidden" name="idpermohonan" value="17">
+        <input type="hidden" name="status" value="DITERIMA">
+      </form>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+        <a href="" target="_blank" name="nomorwa"><button onclick="document.getElementById('formwa').submit();" class="btn btn-primary">Kirim</button></a>
       </div>
     </div>
   </div>
 </div>
-@endsection
-
-@section('js')
-<script type="text/javascript">
-    $(document).ready(function(){
-          $('#nik').keyup(function(){
-            var maxLength = $(this).attr("maxlength");
-            if(maxLength == $(this).val().length)
-            {
-              var id=$(this).val();
-              $.ajax({
-                  url : "/cekNik",
-                  method : "GET",
-                  data : {nik: id},
-                  async : false,
-                  dataType : 'json',
-                  success: function(data){
-                      $('#result').val(data);
-                      changeFunction(data);
-                  }
-              });
-            }
-            else
-            {
-              changeFunction('hideall');
-            }
-          });
-      });
-</script>
 @endsection

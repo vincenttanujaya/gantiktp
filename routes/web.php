@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/update', 'HomeController@update');
+Route::post('/update', 'HomeController@update');
 Route::get('/riwayat', 'HomeController@riwayat');
 Route::get('/status', 'formController@index');
 Route::post('/statusktp', 'formController@status');

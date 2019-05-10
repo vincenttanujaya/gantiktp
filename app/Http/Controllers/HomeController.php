@@ -24,9 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $DB = DB::table('permohonan')->where('Status','DIPROSES')->paginate(10);
+        $data['DB'] = DB::table('permohonan')->where('Status','DIPROSES')->paginate(10);
+        // $data['nomor'] = 
         // dd($DB);
-        return view('home',compact(['DB']));
+        return view('home',$data);
     }
     
     public function riwayat()
@@ -38,7 +39,8 @@ class HomeController extends Controller
 
     public function update(Request $request)
     {
-        DB::table('permohonan')->where('ID_Permohonan',$request->ID)->update(['Status'=>$request->status]);
+        // dd($request);
+        DB::table('permohonan')->where('ID_Permohonan',$request->idpermohonan)->update(['Status'=>$request->status]);
         return redirect('home');
     }
 }

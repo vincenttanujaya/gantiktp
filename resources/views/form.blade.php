@@ -113,14 +113,24 @@
                     <div class="row form-group">
                       <div class="col">
                         <small><b>No HP</b></small>
-                        <input class="form-control" name="hp" id="hp" required>
-                        <small>Wajib diisi</small>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">+62</div>
+                          </div>
+                          <input class="form-control" name="hp" id="hp" required>
+                        </div>
+                        <small>Wajib diisi. Masukkan nomor tanpa angka 0 atau +62 di depan.</small>
                       </div>
                     </div>
                     <div class="row form-group">
                       <div class="col">
                         <small><b>No WA</b></small>
-                        <input class="form-control" name="wa" id="wa">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">+62</div>
+                          </div>
+                          <input class="form-control" name="wa" id="wa">
+                        </div>
                         <small>Isi apabila anda memiliki nomor aktif Whatsapp</small>
                       </div>
                     </div>
@@ -128,9 +138,9 @@
                         <div class="col">
                           <small><b>Alasan Pergantian</b></small>
                           <select class="form-control" name="alasan" id="alasan" onchange="inputFunction(this)">
-                            <option value="rusak" selected>Rusak</option>
-                            <option value="hilang">Hilang</option>
-                            <option value="pindah">Pindah</option>
+                            <option value="Rusak" selected>Rusak</option>
+                            <option value="Hilang">Hilang</option>
+                            <option value="Pindah">Pindah</option>
                           </select>
                         </div>
                       </div>
