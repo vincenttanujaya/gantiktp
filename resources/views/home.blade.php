@@ -53,7 +53,11 @@
                                                 @endif
                                                 </div>
                                                 <div class="col">
-                                                <button type="button" id="tolak" class="btn btn-sm btn-danger" value="DITOLAK" data-toggle="modal" data-target="#tolakmodal">Tolak</button>
+                                                @if($item->WA == null)
+                                                <button type="button" id="tolak" class="btn btn-sm btn-danger" value="DITOLAK" data-id="{{$item->ID_Permohonan}}" data-hp="{{$item->HP}}"  data-toggle="modal" data-target="#tolakhpmodal">Tolak</button>
+                                                @else
+                                                <button type="button" id="tolak" class="btn btn-sm btn-danger" value="DITOLAK" data-id="{{$item->ID_Permohonan}}"  data-wa="https://api.whatsapp.com/send?phone=62{{$item->WA}}" data-toggle="modal" data-target="#tolakwamodal">Tolak</button>
+                                                @endif
                                                 </div>
                                                 </div>
                                             </form>
@@ -85,7 +89,7 @@
       <form action="/update" method="post" id="formhp">
         {{ csrf_field() }}
         <input type="hidden" name="idpermohonan" value="">
-        <input type="hidden" name="status" value="DITOLAK">
+        <input type="hidden" name="status" value="SELESAI">
       </form>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
@@ -107,16 +111,66 @@
       <div class="modal-body">
         Pemohon memiliki Whatsapp. Kirim notifikasi ke nomor Whatsapp pemohon dan terima permohonan?
       </div>
-      <form action="/update" method="post" id="formwa">
+      <form action="/update" method="post" id="formtolakwa">
         {{ csrf_field() }}
         <input type="hidden" name="idpermohonan" value="17">
-        <input type="hidden" name="status" value="DITERIMA">
+        <input type="hidden" name="status" value="SELESAI">
       </form>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-        <a href="" target="_blank" name="nomorwa"><button onclick="document.getElementById('formwa').submit();" class="btn btn-primary">Kirim</button></a>
+        <a href="" target="_blank" name="nomorwa"><button onclick="document.getElementById('formtolakwa').submit();" class="btn btn-primary">Kirim</button></a>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="tolakhpmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi Penolakan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" name="content">
+          
+        </div>
+        <form action="/update" method="post" id="formtolakhp">
+          {{ csrf_field() }}
+          <input type="hidden" name="idpermohonan" value="">
+          <input type="hidden" name="status" value="DITOLAK">
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+          <button onclick="document.getElementById('formtolakhp').submit();" class="btn btn-primary">Lanjutkan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="tolakwamodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi Penolakan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Pemohon memiliki Whatsapp. Kirim notifikasi <b>penolakan</b> ke nomor Whatsapp pemohon dan tolak permohonan?
+        </div>
+        <form action="/update" method="post" id="formwa">
+          {{ csrf_field() }}
+          <input type="hidden" name="idpermohonan" value="17">
+          <input type="hidden" name="status" value="DITOLAK">
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+          <a href="" target="_blank" name="nomorwa"><button onclick="document.getElementById('formwa').submit();" class="btn btn-primary">Kirim</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
