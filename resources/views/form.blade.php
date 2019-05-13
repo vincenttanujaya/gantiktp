@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Charts</title>
+  <title>Aplikasi Pengajuan Pergantian KTP</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -117,7 +117,7 @@
                           <div class="input-group-prepend">
                             <div class="input-group-text">+62</div>
                           </div>
-                          <input class="form-control" name="hp" id="hp" required>
+                          <input type="number" class="form-control" name="hp" id="hp" required>
                         </div>
                         <small>Wajib diisi. Masukkan nomor tanpa angka 0 atau +62 di depan.</small>
                       </div>
@@ -129,7 +129,7 @@
                           <div class="input-group-prepend">
                             <div class="input-group-text">+62</div>
                           </div>
-                          <input class="form-control" name="wa" id="wa">
+                          <input type="number" class="form-control" name="wa" id="wa">
                         </div>
                         <small>Isi apabila anda memiliki nomor aktif Whatsapp</small>
                       </div>
