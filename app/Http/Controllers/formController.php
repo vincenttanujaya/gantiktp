@@ -31,11 +31,15 @@ class formController extends Controller
         return redirect('status');
     }
 
-    public function viewForm($nik)
+    public function viewForm($nik = null)
     {
-        $data = DB::table('kependudukan')->where('NIK',$nik)->get();
-
-        return view('form', $data);
+        if(is_null($nik)){
+            return view('form2');
+        }
+        else {
+            $data = DB::table('kependudukan')->where('NIK',$nik)->get();
+            return view('form', $data);
+        }
     }
 
     public function form(Request $request)

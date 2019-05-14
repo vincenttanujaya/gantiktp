@@ -25,6 +25,7 @@ Route::post('/statusktp', 'formController@status');
 Route::get('/status2', 'formController@status2');
 Route::post('/submitform', 'formController@submit');
 Route::post('/form', 'formController@form');
+Route::get('/form2', 'formController@viewForm');
 Route::get('/form/{nik}', 'formController@viewForm');
 Route::get('/cekdata', 'formController@cekdata');
 Route::get('/cekNik', 'formController@cekNik');
