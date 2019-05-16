@@ -137,10 +137,8 @@
                     <div class="row form-group">
                         <div class="col">
                           <small><b>Alasan Pergantian</b></small>
-                          <select class="form-control" name="alasan" id="alasan" onchange="inputFunction(this)">
-                            <option value="Rusak" selected>Rusak</option>
-                            <option value="Hilang">Hilang</option>
-                            <option value="Pindah">Pindah</option>
+                          <select class="form-control" name="alasan" id="alasan" readonly>
+                            <option value="Pindah" selected>Pindah</option>
                           </select>
                         </div>
                       </div>
