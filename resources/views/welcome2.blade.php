@@ -117,7 +117,7 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer class="sticky-footer" style="background-color:#1c4b82; bottom: 0; left: 0; position: fixed; width: 100%;">
+      <footer class="sticky-footer pt-1 pb-1" style="background-color:#1c4b82; bottom: 0; left: 0; position: fixed; width: 100%;">
         <div class="container my-auto" >
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; ITS Surabaya</span>
