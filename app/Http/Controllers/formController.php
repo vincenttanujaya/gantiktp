@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -93,5 +94,14 @@ class formController extends Controller
             return response()->json($result);
         }
         return "false";
+    }
+    public function panduan(){
+        $file= public_path(). "/panduan.pdf";
+
+        $headers = array(
+                    'Content-Type: application/pdf',
+                );
+
+        return Response::download($file, 'panduan.pdf', $headers);
     }
 }

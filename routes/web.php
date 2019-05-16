@@ -29,3 +29,5 @@ Route::get('/form2', 'formController@viewForm');
 Route::get('/form/{nik}', 'formController@viewForm');
 Route::get('/cekdata', 'formController@cekdata');
 Route::get('/cekNik', 'formController@cekNik');
+Route::get('/panduan', 'formController@panduan');
+
