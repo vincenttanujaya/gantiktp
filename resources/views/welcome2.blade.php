@@ -71,6 +71,10 @@
                 <a href="{{ url('/form2')}}"><button class="btn btn-primary">Pindah</button></a>
               </div>
 
+              <div class="alert alert-danger alert-dismissible fade show" style="display:none;" role="alert" id="over">
+                <strong>Periksa lagi NIK anda!</strong> NIK anda lebih dari 16 digit angka.
+              </div>
+
               <div class="alert alert-success alert-dismissible fade show" style="display:none;" role="alert" id="success">
                 <strong>Data anda ditemukan!</strong> 
               </div>
@@ -152,18 +156,28 @@
         $('#fail').hide();
         $('#success').show();
         $('#submit').show();
+        $('#over').hide();
       }
       else if($data == 'hideall')
       {
         $('#fail').hide();
         $('#success').hide();
         $('#submit').hide();
+        $('#over').hide();
+      }
+      else if($data == 'over')
+      {
+        $('#fail').hide();
+        $('#success').hide();
+        $('#submit').hide();
+        $('#over').show();
       }
       else
       {
         $('#fail').show();
         $('#success').hide();
         $('#submit').hide();
+        $('#over').hide();
       }
     }
 
@@ -184,6 +198,10 @@
                     changeFunction(data);
                 }
             });
+          }
+          else if($(this).val().length > maxLength)
+          {
+            changeFunction('over');
           }
           else
           {
